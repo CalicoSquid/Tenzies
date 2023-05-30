@@ -1,0 +1,256 @@
+@import url(//fonts.googleapis.com/css?family=Vibur);
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: rgb(75,35,72);
+  background: radial-gradient(circle, rgba(75,35,72,1) 0%, rgba(0,0,0,1) 100%, rgba(255,255,255,0.9346113445378151) 100%);
+}
+
+@font-face {
+  font-family: Tenzies;
+  src: url("./Fonts/NeonLight-Regular.ttf");
+}
+
+@font-face {
+  font-family: Scoreboard;
+  src: url("./Fonts/mexcellent 3d.otf");
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#wrapper {
+position: relative;
+background: #0B2434;
+}
+
+#wrapper::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  background: linear-gradient(135deg,
+    hsl(0, 100%, 50%),
+    hsl(60, 100%, 50%),
+    hsl(120, 100%, 50%),
+    hsl(180, 100%, 50%),
+    hsl(240, 100%, 50%),
+    hsl(300, 100%, 50%),
+    hsl(0, 100%, 50%)); 
+  left: -5px;
+  top: -5px;
+  height: calc(100% + 10px);
+  width: calc(100% + 10px);
+  animation: bg-move-1 4s linear infinite;
+  background-size: 200%;
+}
+
+@keyframes bg-move-1 {
+    0% {
+      background-position: 1% 0%
+  }
+    50% {
+      background-position: 99% 100%
+  }
+    100% {
+      background-position: 1% 0%
+  }
+}
+
+.frame {
+  width: 360px;
+  height: 379px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-container {
+  height: 320px;
+  width: 320px;
+  border-radius: 10px;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.grid-container {
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+.die {
+  height: 40px;
+  width: 40px;
+  border-radius: 10px;
+  box-shadow: 5px 8px 6px rgb(0, 0, 0);
+  cursor: pointer;
+}
+
+.dice-face {
+ font-size: 50px;
+ --fa-animation-iteration-count: 1;
+}
+
+.held-one {
+  background: -webkit-radial-gradient(#f7d7bd, orangered);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.held-two {
+  background: -webkit-radial-gradient(rgb(193, 231, 247), rgb(0, 174, 243));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.held-three {
+  background: -webkit-radial-gradient( rgb(240, 154, 211), rgb(230, 45, 168));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.held-four {
+  background: -webkit-radial-gradient(rgb(190, 241, 190), rgb(2, 190, 2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.held-five {
+  background: -webkit-radial-gradient(rgb(245, 169, 169), red);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.held-six {
+  background: -webkit-radial-gradient(rgb(237, 210, 252), rgb(162, 1, 255));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.not-held {
+  background: -webkit-radial-gradient(#7c7171, #000);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.roll-dice {
+  height: 40px;
+  width: 100px;
+  background: rgb(173,45,162);
+  background: radial-gradient(circle, rgba(173,45,162,1) 0%, rgba(163,36,244,1) 100%, rgba(255,0,217,0.9346113445378151) 100%);
+  box-shadow: 0px 3.2px 7.68px rgba(0, 0, 0, 0.18);
+  border-radius: 3.8px;
+  font-size: 1rem;
+  color: white;
+  cursor: pointer;
+  border: none;
+}
+
+.roll-dice:focus {
+  outline: none;
+}
+
+.roll-dice:active {
+  box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
+}
+
+#scoreboard {
+  display: flex;
+}
+
+.score {
+  height: 80px;
+  width: 80px;
+  text-align: center;
+  position: relative;
+}
+
+.score-text {
+  position: absolute;
+  top: 0;
+  font-size: 13px;
+  width: 100%;
+}
+
+.score-count {
+  position: absolute;
+  bottom: 0;
+  font-size: 50px;
+  width: 100%;
+  font-family: "Scoreboard", sans-serif;
+ text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 100px #ffd900, 0 0 20px #ffd900, 0 0 500px #ffd900;
+}
+
+.logo {
+  text-align: center;
+
+}
+
+.logo b{
+  font-family: "Tenzies", Vibur, sans-serif;
+  font-size: 5rem;
+  color: #fee;
+  text-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em #ff00dd, 0 0 0.5em #ff00dd, 0 0 0.1em #ff00dd, 0 10px 3px #000;
+}
+
+.logo b span{
+  animation: blink linear infinite 2s;
+}
+
+.logo b span:nth-of-type(2){
+  animation: blink linear infinite 3s;
+}
+@keyframes blink {
+  78% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  79%{
+     color: #333;
+  }
+  80% {
+    
+    text-shadow: none;
+  }
+  81% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  82% {
+    color: #333;
+    text-shadow: none;
+  }
+  83% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  92% {
+    color: #333;
+    text-shadow: none;
+  }
+  92.5% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+}
