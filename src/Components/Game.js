@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react"
 import Die from "./Die"
 import Header from "./Header"
+import Welcome from "./Welcome"
 import Confetti from 'react-confetti'
 import useSound from 'use-sound'
 import {nanoid} from "nanoid"
@@ -32,9 +33,10 @@ export default function Game() {
             playWinner()
             highScore()
         }
-    }, [dice, playWinner, highScore])
+    }, [dice, playWinner])
 
     function startGame() {
+        setTenzies(false)
         playGameStart()
         setStart(true)
     }
@@ -106,21 +108,7 @@ export default function Game() {
             
             <div className="frame">
 
-                {!start && <div className="welcome">
-                <div className="logo start-logo">
-                <b><i class="fa-solid fa-dice"></i></b>
-                </div>
-                    <p className="title">How to play</p>
-                    <p className="instructions">
-                        Roll until all dice are the same.
-                        <br/>
-                        Click each die to freeze it at its current value between rolls.
-                    </p>
-                    <button 
-                    className="start"
-                    onClick={startGame}
-                    >Got it!</button>
-                </div>}
+                {!start && <Welcome startGame={startGame}/>}
 
                 {start && <div className="game-container">
                     <div id="scoreboard">
@@ -147,6 +135,15 @@ export default function Game() {
                 </div>}    
             </div>
         </div>
+        <footer className="footer">Created by 
+        <span className="signature signature-c">
+            <a href="https://github.com/CalicoSquid"> CalicoSquid </a></span>
+         using 
+         <span className="signature signature-r"> 
+            {" "}
+            <i class="fa-brands fa-react"></i>
+         </span>
+         </footer>
         </>
         
     )
