@@ -101,6 +101,7 @@ background: #0B2434;
 }
 
 .dice-face {
+  cursor: pointer;
  font-size: 50px;
  --fa-animation-iteration-count: 1;
 }
@@ -252,5 +253,14 @@ background: #0B2434;
   92.5% {
     color: inherit;
     text-shadow: inherit;
+  }
+}
+
+@media (max-width: 480px) {
+  #wrapper {
+    height: 100%;
+    border: 2px solid red;
+    width: 90%;
+    align-items: center;
   }
 }
