@@ -7,7 +7,7 @@ import {nanoid} from "nanoid"
 import diceSound from "../Sounds/dice-roll.mp3"
 import winner from "../Sounds/winner-winner.mp3"
 import click from "../Sounds/click.mp3"
-import start from "../Sounds/game-start.mp3"
+import startNewGame from "../Sounds/game-start.mp3"
 
 
 
@@ -18,10 +18,11 @@ export default function Game() {
     const [currentScore, setCurrentScore] = useState(0)
     const [bestScore, setBestScore] = useState(JSON.parse(localStorage.getItem("highscore")) || 0)
     const [tenzies, setTenzies] = useState(true)
+    const [start, setStart] = useState(false)
     const [playDice] = useSound(diceSound)
     const [playWinner] = useSound(winner)
     const [playClick]= useSound(click)
-    const [playGameStart] = useSound(start)
+    const [playGameStart] = useSound(startNewGame)
 
     useEffect(() => {
         const allEqual = dice.every(die => die.value === dice[0].value);
@@ -31,7 +32,12 @@ export default function Game() {
             playWinner()
             highScore()
         }
-    }, [dice])
+    }, [dice, playWinner, highScore])
+
+    function startGame() {
+        playGameStart()
+        setStart(true)
+    }
 
     function generateNewDie() {
         let diceNum = Math.ceil(Math.random() * 6)
@@ -75,7 +81,7 @@ export default function Game() {
     }
 
     function newGame() {
-        playGameStart()
+        playDice()
         setDice(allNewDice())
         setCurrentScore(0)
         setTenzies(false)
@@ -97,32 +103,49 @@ export default function Game() {
         {tenzies && currentScore > 0 && <Confetti />}
         <div id="wrapper">
             <Header />
-            <div className="frame">
-            <div className="game-container">
-                <div id="scoreboard">
-                    <div className="score current">
-                        <p className="score-text">Score</p>
-                        <div className="score-count">{currentScore}</div>
-                    </div>
-                    <div className="score high">
-                        <p className="score-text">Best Score</p>
-                        { bestScore > 0 && <div className="score-count">{bestScore}</div>}
-                    </div>
-                </div>
-                <div className="grid-container">
-                    {diceElements}
-                </div>
-                <button 
-                className="roll-dice" 
-                onClick={tenzies ? newGame : rollDice}
-                
-                >
-                    {tenzies ? "New Game" : "Roll"}
-                </button>
-                
-            </div>
             
-       </div>
+            <div className="frame">
+
+                {!start && <div className="welcome">
+                <div className="logo start-logo">
+                <b><i class="fa-solid fa-dice"></i></b>
+                </div>
+                    <p className="title">How to play</p>
+                    <p className="instructions">
+                        Roll until all dice are the same.
+                        <br/>
+                        Click each die to freeze it at its current value between rolls.
+                    </p>
+                    <button 
+                    className="start"
+                    onClick={startGame}
+                    >Got it!</button>
+                </div>}
+
+                {start && <div className="game-container">
+                    <div id="scoreboard">
+                        <div className="score current">
+                            <p className="score-text">Score</p>
+                            <div className="score-count">{currentScore}</div>
+                        </div>
+                        <div className="score high">
+                            <p className="score-text">Best Score</p>
+                            { bestScore > 0 && <div className="score-count">{bestScore}</div>}
+                        </div>
+                    </div>
+                    <div className="grid-container">
+                        {diceElements}
+                    </div>
+                    <button 
+                    className="roll-dice" 
+                    onClick={tenzies ? newGame : rollDice}
+                    
+                    >
+                        {tenzies ? "New Game" : "Roll"}
+                    </button>
+                    
+                </div>}    
+            </div>
         </div>
         </>
         
